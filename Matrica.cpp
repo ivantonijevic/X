@@ -28,8 +28,10 @@ Matrica::~Matrica() {
     for (int i = 0; i < n; i++)
         delete[] mat[i];
     delete[] mat;
+    mat=nullptr;
 
     delete[] naziv;
+    naziv=nullptr;
 }
 
 void Matrica::setNaziv(const char* ime) {
@@ -111,4 +113,5 @@ Matrica Matrica::kroneker(const Matrica& b) const {
 
     return rez;
 }
+
 
