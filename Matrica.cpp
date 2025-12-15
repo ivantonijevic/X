@@ -57,7 +57,7 @@ void Matrica::prikaz() const {
 
 double Matrica::sumaReda(int r) const {
     if (r >= n) {
-        cout << "Neispravan indeks reda!" << endl;
+        cout << "Neispravan indeks reda" << endl;
         return 0;
     }
 
@@ -111,3 +111,4 @@ Matrica Matrica::kroneker(const Matrica& b) const {
 
     return rez;
 }
+
