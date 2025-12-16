@@ -12,9 +12,9 @@ int main() {
     cin >> m;
 
     Matrica A(n, m);
-    A.setNaziv("A");
+    A.setNaziv("PrvaLabVezba");
 
-    cout << "Unos elemenata matrice: \n";
+    cout << "\nUnos elemenata matrice:\n";
     A.unos();
 
     double sumaKolona = A.sumaKolone(0) + A.sumaKolone(2);
@@ -23,7 +23,7 @@ int main() {
     cout << "\nSuma 1. i 3. kolone: " << sumaKolona << endl;
     cout << "Suma 2. i 3. reda: " << sumaRedova << endl;
 
-    cout << "\nMatrica A:\n";
+    cout << "\nMatrica " << A.getNaziv() << ":\n";
     A.prikaz();
 
     return 0;
