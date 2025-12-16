@@ -4,12 +4,12 @@ class Matrica {
 private:
     double** mat;
     int n;
-    int m; 
+    int m;
     char* naziv;
 
 public:
-    Matrica();                 
-    Matrica(int n, int m);     
+    Matrica();
+    Matrica(int n, int m);
     ~Matrica();
 
     inline int getN() const { return n; }
@@ -21,9 +21,12 @@ public:
     Matrica proizvod(const Matrica& druga) const;
     Matrica kroneker(const Matrica& druga) const;
 
-    void setNaziv(const char* ime);
-
     void unos();
     void prikaz() const;
 
+    inline const char* getNaziv() const {
+        return naziv;
+    }
+
+    void setNaziv(const char* ime);
 };
