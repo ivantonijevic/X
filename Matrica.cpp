@@ -1,6 +1,6 @@
 #include "Matrica.h"
 #include <iostream>
-#include <string.h>
+#include <cstring>
 
 using namespace std;
 
@@ -28,14 +28,14 @@ Matrica::~Matrica() {
     for (int i = 0; i < n; i++)
         delete[] mat[i];
     delete[] mat;
-    mat=nullptr;
+    mat = nullptr;
 
     delete[] naziv;
-    naziv=nullptr;
+    naziv = nullptr;
 }
 
 void Matrica::setNaziv(const char* ime) {
-    delete[] naziv; //OVO OSTAVI AKO JE COPY CONSTRUCTOR
+    delete[] naziv;
 
     naziv = new char[strlen(ime) + 1];
     strcpy_s(naziv, strlen(ime) + 1, ime);
@@ -58,8 +58,8 @@ void Matrica::prikaz() const {
 }
 
 double Matrica::sumaReda(int r) const {
-    if (r >= n) {
-        cout << "Neispravan indeks reda" << endl;
+    if (r < 0 || r >= n) {
+        cout << "Neispravan indeks reda!" << endl;
         return 0;
     }
 
@@ -69,10 +69,9 @@ double Matrica::sumaReda(int r) const {
     return suma;
 }
 
-
 double Matrica::sumaKolone(int k) const {
-    if (k >= m) {
-        cout << "Neispravan indeks kolone" << endl;
+    if (k < 0 || k >= m) {
+        cout << "Neispravan indeks kolone!" << endl;
         return 0;
     }
 
@@ -82,17 +81,16 @@ double Matrica::sumaKolone(int k) const {
     return suma;
 }
 
-
 Matrica Matrica::proizvod(const Matrica& b) const {
-    if (m != b.n) {
+    if (m != b.getN()) {
         cout << "Matrice nisu kompatibilne za mnozenje!" << endl;
-        return Matrica(); // prazna 20x20 matrica
+        return Matrica();
     }
 
-    Matrica rez(n, b.m);
+    Matrica rez(n, b.getM());
 
     for (int i = 0; i < n; i++)
-        for (int j = 0; j < b.m; j++) {
+        for (int j = 0; j < b.getM(); j++) {
             rez.mat[i][j] = 0;
             for (int k = 0; k < m; k++)
                 rez.mat[i][j] += mat[i][k] * b.mat[k][j];
@@ -102,16 +100,14 @@ Matrica Matrica::proizvod(const Matrica& b) const {
 }
 
 Matrica Matrica::kroneker(const Matrica& b) const {
-    Matrica rez(n * b.n, m * b.m);
+    Matrica rez(n * b.getN(), m * b.getM());
 
     for (int i = 0; i < n; i++)
         for (int j = 0; j < m; j++)
-            for (int x = 0; x < b.n; x++)
-                for (int y = 0; y < b.m; y++)
-                    rez.mat[i * b.n + x][j * b.m + y] =
+            for (int x = 0; x < b.getN(); x++)
+                for (int y = 0; y < b.getM(); y++)
+                    rez.mat[i * b.getN() + x][j * b.getM() + y] =
                     mat[i][j] * b.mat[x][y];
 
     return rez;
 }
-
-
